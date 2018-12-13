@@ -38,5 +38,6 @@ The ``message`` key is the message sent to the player after they vote
 | {real-name}    | The voter's full username |
 | {display-name} | The voter's display name  |
 | &              | Change message color      |
+
 The ``items`` array is the items the player will be given for voting. If you follow the guidelines you shouldn't have any problems.
 > Notice: Issues regarding items not working will be closed, as it works fine if you follow the guidelines
