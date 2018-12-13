@@ -28,9 +28,15 @@ claim:
 ```
 The first thing you can see in the config is ``api-key``. This is what BetterVoting uses to connect to the vote website and claim players' votes.
 To get your API key, go to [Manage Your Servers](https://minecraftpocket-servers.com/servers/manage/) on minecraftpocket-servers and paste in your API key.
-> Notice:As of now, BetterVoting only supports minecraftpocket-servers, and 1 server. Multi website support is a planned feature
+> Notice: As of now, BetterVoting only supports minecraftpocket-servers, and 1 server. Multi website support is a planned feature
 
 Next in the config you will see claim information. The ``broadcast`` key, this is the message that get's broadcasted to the server when a player votes
 The ``message`` key is the message sent to the player after they vote
+
+| Variable       | Description               |
+|----------------|---------------------------|
+| {real-name}    | The voter's full username |
+| {display-name} | The voter's display name  |
+| &              | Change message color      |
 The ``items`` array is the items the player will be given for voting. If you follow the guidelines you shouldn't have any problems.
-> Note: Issues regarding items not working will be closed, as it works fine if you follow the guidelines
+> Notice: Issues regarding items not working will be closed, as it works fine if you follow the guidelines
