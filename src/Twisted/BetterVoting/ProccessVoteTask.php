@@ -38,7 +38,7 @@ class ProccessVoteTask extends AsyncTask{
 		}
 		/** @var BetterVoting $main */
 		$main = $server->getPluginManager()->getPlugin("BetterVoting");
-		//Internet::getURL("https://minecraftpocket-servers.com/api/?action=post&object=votes&element=claim&key=" . $this->apiKey . "&username=" . $this->username);
+		Internet::getURL("https://minecraftpocket-servers.com/api/?action=post&object=votes&element=claim&key=" . $this->apiKey . "&username=" . $this->username);
 		$main->claimVote($player);
 	}
 }
