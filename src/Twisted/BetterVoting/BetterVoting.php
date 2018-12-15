@@ -38,7 +38,7 @@ class BetterVoting extends PluginBase{
 				$sender->sendMessage(TextFormat::RED . "This server has not provided a valid API key in their configuration");
 				return false;
 			}
-			$this->getServer()->getAsyncPool()->submitTask(new ProccessVoteTask($this->apiKey, $sender->getName()));
+			$this->getServer()->getAsyncPool()->submitTask(new ProcessVoteTask($this->apiKey, $sender->getName()));
 			return true;
 		}
 		switch($args[0]){

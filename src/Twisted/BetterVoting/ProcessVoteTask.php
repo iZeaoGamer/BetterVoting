@@ -8,7 +8,7 @@ use pocketmine\Server;
 use pocketmine\utils\Internet;
 use pocketmine\utils\TextFormat;
 
-class ProccessVoteTask extends AsyncTask{
+class ProcessVoteTask extends AsyncTask{
 
 	/** @var string $apiKey */
 	private $apiKey;
