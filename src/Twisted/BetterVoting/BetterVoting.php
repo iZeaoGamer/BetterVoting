@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Twisted\BetterVoting;
 
+use DaPigGuy\PiggyCustomEnchants\CustomEnchants\CustomEnchantsIds;
+use DaPigGuy\PiggyCustomEnchants\Main;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\item\enchantment\Enchantment;
@@ -19,6 +21,8 @@ class BetterVoting extends PluginBase{
 	private $apiKey = null;
 	/** @var array $data */
 	private $data = [];
+	/** @var null|Main $ce */
+	private $ce;
 
 	public function onEnable(): void{
 		$config = $this->getConfig();
@@ -26,6 +30,7 @@ class BetterVoting extends PluginBase{
 		else $this->apiKey = $config->get("api-key");
 		if(!is_array($config->get("claim"))) $this->getLogger()->error("Please give a valid configuration in " . $this->getDataFolder() . "config.yml (Delete to reset)");
 		else $this->data = $config->get("claim");
+		$this->ce = $this->getServer()->getPluginManager()->getPlugin("PiggyCustomEnchants");
 	}
 
 	public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool{
@@ -87,8 +92,9 @@ class BetterVoting extends PluginBase{
 		foreach($items as $item){
 			$info = explode(":", $item);
 			if(empty($info[3])) break;
-			$const = Item::class . "::" . strtoupper($info[0]);
-			if(defined($const)) $reward = Item::get(constant($const), (int)$info[1], (int)$info[2]);
+			$id = Item::class . "::" . strtoupper($info[0]);
+			if(defined($id)) $reward = Item::get(constant($id), (int)$info[1], (int)$info[2]);
+			else continue;
 			if(strtolower($info[3]) !== "default") $reward->setCustomName($info[3]);
 			$enchants = [];
 			for($i = 0; $i < count($info); $i++){
@@ -99,8 +105,11 @@ class BetterVoting extends PluginBase{
 				}
 			}
 			foreach($enchants as $enchant => $level){
-				$const = Enchantment::class . "::" . strtoupper($enchant);
-				if(defined($const)) $reward->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(constant($const)), $level));
+				$id = Enchantment::class . "::" . strtoupper($enchant);
+				$ceid = null;
+				if(!defined($id) && $this->ce !== null) $ceid = CustomEnchantsIds::class . "::" . strtoupper($enchant);
+				if(defined($id)) $reward->addEnchantment(new EnchantmentInstance(Enchantment::getEnchantment(constant($id)), $level));
+				if($ceid !== null && defined($ceid)) $this->ce->addEnchantment($reward, constant($ceid), $level);
 			}
 			$rewards[] = $reward;
 		}

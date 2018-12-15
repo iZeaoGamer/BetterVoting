@@ -15,6 +15,7 @@ claim:
     # For no custom name/default item name, put "default"
     # First 4 fields are required, enchants are optional
     # You can have unlimited enchants, just follow the format "EnchantName:EnchantLevel:EnchantName:EnchantLevel" etc
+    # There is also support for PiggyCustomEnchants, use same format as normal enchants
     - "diamond_sword:0:1:Vote Sword:sharpness:5:unbrealing:3"
-    - "diamond_pickaxe:0:1:default:efficiency:2"
+    - "diamond_pickaxe:0:1:default:efficiency:2:driller:3"
 ...
