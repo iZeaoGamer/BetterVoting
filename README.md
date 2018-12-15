@@ -24,7 +24,7 @@ claim:
     # First 4 fields are required, enchants are optional
     # There is also support for PiggyCustomEnchants, use same format as normal enchants
     # You can have unlimited enchants, just follow the format "EnchantName:EnchantLevel:EnchantName:EnchantLevel" etc
-    - "diamond_sword:0:1:Vote Sword:sharpness:5:unbrealing:3"
+    - "diamond_sword:0:1:Vote Sword:sharpness:5:unbreaking:3"
     - "diamond_pickaxe:0:1:default:efficiency:2:driller:3"
 ```
 The first thing you can see in the config is ``api-key``. This is what BetterVoting uses to connect to the vote website and claim players' votes.
