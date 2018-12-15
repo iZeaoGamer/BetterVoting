@@ -7,6 +7,7 @@ use DaPigGuy\PiggyCustomEnchants\CustomEnchants\CustomEnchantsIds;
 use DaPigGuy\PiggyCustomEnchants\Main;
 use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
+use pocketmine\command\ConsoleCommandSender;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\Item;
@@ -71,11 +72,23 @@ class BetterVoting extends PluginBase{
 		return str_replace([
 			"{real-name}",
 			"{display-name}",
-			"&"
+			"&",
+			"{x}",
+			"{floor-x}",
+			"{y}",
+			"{floor-y}",
+			"{z}",
+			"{floor-z}",
 		], [
 			$player->getName(),
 			$player->getDisplayName(),
-			"§"
+			"§",
+			$player->getX(),
+			$player->getFloorX(),
+			$player->getY(),
+			$player->getFloorY(),
+			$player->getZ(),
+			$player->getFloorZ()
 		], $message);
 	}
 
@@ -124,5 +137,6 @@ class BetterVoting extends PluginBase{
 			if($player->getInventory()->canAddItem($reward)) $player->getInventory()->addItem($reward);
 			else $player->getLevel()->dropItem($player, $reward);
 		}
+		if(isset($data["commands"]) && is_array($data["commands"])) foreach($data["commands"] as $command) $this->getServer()->dispatchCommand(new ConsoleCommandSender(), $this->translateMessage($command, $player));
 	}
 }
