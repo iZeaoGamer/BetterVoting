@@ -21,24 +21,29 @@ class ProcessVoteTask extends AsyncTask{
 	}
 
 	public function onRun(): void{
-		$this->setResult(Internet::getURL("https://minecraftpocket-servers.com/api/?object=votes&element=claim&key=" . $this->apiKey . "&username=" . $this->username));
+		$result = Internet::getURL("https://minecraftpocket-servers.com/api/?object=votes&element=claim&key=" . $this->apiKey . "&username=" . $this->username);
+		if($result === "1") Internet::getURL("https://minecraftpocket-servers.com/api/?action=post&object=votes&element=claim&key=" . $this->apiKey . "&username=" . $this->username);
+		$this->setResult($result);
 	}
 
 	public function onCompletion(Server $server): void{
 		$result = $this->getResult();
 		$player = $server->getPlayer($this->username);
-		if($player == null) return;
-		if($result == "Error: server key not found"){
+		if($player === null) return;
+		if($result === "Error: server key not found"){
 			$player->sendMessage(TextFormat::RED . "This server has not provided a valid API key in their configuration");
 			return;
 		}
-		if(!(bool)$result){
+		if($result === "0"){
 			$player->sendMessage(TextFormat::RED . "You have not voted yet");
+			return;
+		}
+		if($result === "2"){
+			$player->sendMessage(TextFormat::RED . "You have already voted today");
 			return;
 		}
 		/** @var BetterVoting $main */
 		$main = $server->getPluginManager()->getPlugin("BetterVoting");
-		Internet::getURL("https://minecraftpocket-servers.com/api/?action=post&object=votes&element=claim&key=" . $this->apiKey . "&username=" . $this->username);
 		$main->claimVote($player);
 	}
 }

@@ -40,7 +40,7 @@ class BetterVoting extends PluginBase{
 				$sender->sendMessage(TextFormat::RED . "Use '/vote reload', or use command in game");
 				return false;
 			}
-			if($this->apiKey == null){
+			if($this->apiKey === null){
 				$sender->sendMessage(TextFormat::RED . "This server has not provided a valid API key in their configuration");
 				return false;
 			}
@@ -63,6 +63,14 @@ class BetterVoting extends PluginBase{
 					$sender->sendMessage("Please give a valid configuration in " . $this->getDataFolder() . "config.yml (Delete to reset)");
 				}else $this->data = $config->get("claim");
 				$sender->sendMessage(TextFormat::GREEN . "Configuration successfully reloaded");
+				break;
+			case "top":
+				if($this->apiKey === null){
+					$sender->sendMessage(TextFormat::RED . "This server has not provided a valid API key in their configuration");
+					return false;
+				}
+				$display = (int)$this->getConfig()->getNested("top-votes.display");
+				$this->getServer()->getAsyncPool()->submitTask(new GetTopVotersTask($sender->getName(), $this->apiKey, $display > 0 ? ($display > 500 ? 500 : $display) : 1));
 				break;
 		}
 		return true;

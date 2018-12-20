@@ -30,4 +30,8 @@ claim:
     # Do not include "/" at the start of the command
     - "title {real-name} title &aVote"
     - "title {real-name} subtitle &7Thanks for voting!"
+top-votes:
+  title: "&aTop Votes This Month" # Message sent before displaying top votes
+  display: 10 # Amount of top votes to dispay, can't be bigger than 500
+  format: "&6{number}. &b{username}: &e{votes}" # Format of displaying top voters
 ...

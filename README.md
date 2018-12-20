@@ -1,3 +1,5 @@
+[![](https://poggit.pmmp.io/shield.state/BetterVoting)](https://poggit.pmmp.io/p/BetterVoting) [![](https://poggit.pmmp.io/shield.api/BetterVoting)](https://poggit.pmmp.io/p/BetterVoting) [![](https://poggit.pmmp.io/shield.dl.total/BetterVoting)](https://poggit.pmmp.io/p/BetterVoting)
+
 # BetterVoting
 BetterVoting is a PocketMine-MP plugin for letting players claim their rewards from voting for your server.
 
@@ -38,6 +40,10 @@ claim:
     # Do not include "/" at the start of the command
     - "title {real-name} title &aVote"
     - "title {real-name} subtitle &7Thanks for voting!"
+top-votes:
+  title: "&aTop Votes This Month" # Message sent before displaying top votes
+  display: 10 # Amount of top votes to dispay, can't be bigger than 500
+  format: "&6{number}. &b{username}: &e{votes}" # Format of displaying top voters
 ```
 The first thing you can see in the config is ``api-key``. This is what BetterVoting uses to connect to the vote website and claim players' votes.
 To get your API key, go to [Manage Your Servers](https://minecraftpocket-servers.com/servers/manage/) on minecraftpocket-servers and paste in your API key.
@@ -63,3 +69,6 @@ The ``items`` array is the items the player will be given for voting. If you fol
 
 The ``commands`` array is the commands to be executed by console when a player votes. Don't include the ``/`` in commands.
 You can use the message variables in commands aswell
+
+The ``top-votes`` array is the information used for ``/vote top``. ``title`` is the message sent to the player before sending the top voters.
+``display`` is the number of voters to send to the player. ``format`` is the message sent to the player for every top voter.
