@@ -35,11 +35,11 @@ class ProcessVoteTask extends AsyncTask{
 			return;
 		}
 		if($result === "0"){
-			$player->sendMessage(TextFormat::RED . "You have not voted yet");
+			$player->sendMessage(TextFormat::RED . "§cYou have not voted yet\n§bVote using this link: §3http://zpevote.ml §bfor §3cool rewards!");
 			return;
 		}
-		if($result === "2"){
-			$player->sendMessage(TextFormat::RED . "You have already voted today");
+		if($result === "4"){
+			$player->sendMessage(TextFormat::RED . "§cYou have already voted today");
 			return;
 		}
 		/** @var BetterVoting $main */
